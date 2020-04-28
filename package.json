@@ -1,23 +1,16 @@
 {
-  "private": true,
-  "dependencies": {
-    "express": "^4.17.1",
-    "mime": "^2.4.4",
-    "mysql": "^2.18.1",
-    "pg": "^7.18.2",
-    "todomvc-app-css": "^2.0.0",
-    "todomvc-common": "^1.0.0",
-    "vue": "^2.1.8"
-  },
   "name": "server",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
+  "dependencies": {
+    "mime": "^2.4.4",
+    "pg": "^7.18.2"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {},
-  "keywords": [],
-  "description": ""
+  "license": "ISC"
 }
