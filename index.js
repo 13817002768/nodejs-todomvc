@@ -104,11 +104,11 @@
 //   console.log('Example app listening on port:%s',port);
 // });
 
-const { Pool } = require('pg');
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true
-});
+// const { Pool } = require('pg');
+// const pool = new Pool({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: true
+// });
 
 // const client = pool.connect();
 
@@ -122,22 +122,22 @@ var url = require("url");
 // 加载 mime 模块
 var mime = require("mime");
 
-// var mysql = require("mysql");
-// 	var client = mysql.createConnection({
-// 		"host":"localhost",
-// 		"port":"3306",
-// 		"user":"root",
-// 		"password":"root"
-// 	});
+var mysql = require("mysql");
+	var client = mysql.createConnection({
+		"host":"localhost",
+		"port":"3306",
+		"user":"root",
+		"password":"root"
+	});
 
-// 	client.query("USE test",function(error,results){
-// 		if(error){
-// 			console.log("ClientConnectionReady Error:"+error.message);
-// 			client.end();
-// 			return;
-// 		}
-// 		// InsertData(client);
-// 	});
+	client.query("USE test",function(error,results){
+		if(error){
+			console.log("ClientConnectionReady Error:"+error.message);
+			client.end();
+			return;
+		}
+		// InsertData(client);
+	});
 
 	// InsertData=function(){
 	// 	var values = [12,"hello","node mysql at:"+Math.random()];
@@ -168,33 +168,33 @@ http.createServer(function (request, response) {
     render(filePath, response);
     
   }
-  // else if (request.url.startsWith('/insert')) {
-  //   console.log("成功调用插入函数");
-  //   var params = url.parse(request.url, true).query;
-  //   var values = [params.id,params.content,params.completed]
-  //   console.log(params);
+  else if (request.url.startsWith('/insert')) {
+    console.log("成功调用插入函数");
+    var params = url.parse(request.url, true).query;
+    var values = [params.id,params.content,params.completed]
+    console.log(params);
 
-  //   var client = pool.connect();
-  //   client.query("INSERT INTO todo SET id=1,content=1,completed=1");
-  //   response.end();
+    // var client = pool.connect();
+    client.query("INSERT INTO todo SET id=?,content=?,completed=?",values);
+    response.end();
 
-  // }
-  else if (request.url.startsWith("/insert")) {
-    console.log('成功');
+  }
+  // else if (request.url.startsWith("/insert")) {
+  //   console.log('成功');
 
     
-    pool.connect(function(error,client,done){
-      let sqlStr = 'SELECT * FROM todo';      // 查表的SQL语句
-      client.query(sqlStr, [], function(err, response) {
-      done();
-      console.log(response.rows)  		  // 根据SQL语句查出的数据
-    })
+  //   pool.connect(function(error,client,done){
+  //     let sqlStr = 'SELECT * FROM todo';      // 查表的SQL语句
+  //     client.query(sqlStr, [], function(err, response) {
+  //     done();
+  //     console.log(response.rows)  		  // 根据SQL语句查出的数据
+  //   })
 
-    });
+  //   });
      
     
 
-  }
+  // }
   else if (request.url.startsWith("/update")) {
     console.log("成功调用update函数");
     var params = url.parse(request.url, true).query;
