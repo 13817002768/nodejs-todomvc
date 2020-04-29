@@ -38,9 +38,9 @@ function render(filePath, response) {
 }
 
 http.createServer(function (request, response) {
-  console.log('ttest');
+  //console.log('ttest');
   if (request.url === '/' || request.url === '/index') {
-    console.log('////');
+    //console.log('////');
     filePath = path.join(__dirname, "index.html");
     render(filePath, response);
     
